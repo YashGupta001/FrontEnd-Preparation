@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="search" id="search" placeholder="Search" />
+    <script>
+      // Basic debounce with trailing by default as it first waits for the delay and then triggered
+      //   const debounce = (fn, delay) => {
+      //     let timeout;
+      //     return function (...args) {
+      //       let context = this;
+      //       clearTimeout(timeout);
+      //       timeout = setTimeout(() => {
+      //         fn.apply(context, args);
+      //       }, delay);
+      //     };
+      //   };
+
+      // Debounce with leading and trailing option :we have 2 flags leading and trailing in leading it will invoke the function directly, in trailing it will invoke after the delay and if both the flags are enabled then it will invoke the function 2 times one is during the leading and second is after the delay
+
+      // leading invoke the debounce function at the begining rather than after the delay
+
+      const debounce = (
+        fn,
+        delay,
+        option = { leading: false, trailing: true } //   option = { leading: true, trailing: false  } on resume it start check  -->  option = { leading: true, trailing: true  }
+      ) => {
+        let timeout;
+        let isLeadingInvoked = false;
+
+        return function (...args) {
+          const context = this;
+
+          if (timeout) {
+            clearTimeout(timeout);
+          }
+
+          if (option.leading && !timeout) {
+            fn.apply(context, args);
+            isLeadingInvoked = true;
+          } else {
+            isLeadingInvoked = false;
+          }
+
+          timeout = setTimeout(() => {
+            if (option.trailing && !isLeadingInvoked) {
+              fn.apply(context, args);
+            }
+            timeout = null;
+          }, delay);
+        };
+      };
+
+      const onChange = (e) => {
+        console.log(e.target.value);
+      };
+      const debounceSearch = debounce(onChange, 1000); // when user gives the gap for a delay of 1 sec between the first key press and next key press event then onChange function will be invoked
+      const input = document.getElementById("search");
+      input.addEventListener("keyup", debounceSearch);
+    </script>
+  </body>
+</html>

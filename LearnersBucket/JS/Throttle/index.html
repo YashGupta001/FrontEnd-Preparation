@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Click Me</button>
+    <script>
+      // count based throttle
+
+      // function throttle(fn, count) {
+      //   let counter = 0;
+      //   return function (...args) {
+      //     if (++counter !== count) return;
+      //     counter = 0;
+      //     fn.apply(this, args);
+      //   };
+      // }
+
+      // time based and this also works as a leading (it will trigger click only after delay of given seconds)
+
+      // function throttle(fn, delay) {
+      //   let lastTimerId;
+      //   let lastRan;
+
+      //   return function (...args) {
+      //     let context = this;
+
+      //     if (!lastRan) {
+      //       fn.apply(context, args);
+      //       lastRan = Date.now();
+      //     } else {
+      //       clearTimeout(lastTimerId);
+      //       lastTimerId = setTimeout(() => {
+      //         if (Date.now() - lastRan >= delay) {
+      //           fn.apply(context, args);
+      //           lastRan = Date.now();
+      //         }
+      //       }, delay - (Date.now() - lastRan));
+      //     }
+      //   };
+      // }
+
+      // time based with trailing means it should wait for the delay before even making the first click
+
+      function throttle(fn, delay, option = { leading: true, trailing: true }) {
+        let lastTimerId;
+        let lastArgs;
+
+        return function (...args) {
+          const { leading, trailing } = option;
+
+          const waitFn = () => {
+            if (trailing && lastArgs) {
+              fn.apply(this, lastArgs);
+              lastArgs = null;
+              lastTimerId = setTimeout(waitFn, delay);
+            } else {
+              lastTimerId = null;
+            }
+          };
+
+          if (!lastTimerId && leading) {
+            fn.apply(this, args);
+          } else {
+            lastArgs = args;
+          }
+
+          if (!lastTimerId) {
+            lastTimerId = setTimeout(waitFn, delay);
+          }
+        };
+      }
+
+      const onClick = () => {
+        console.log("Clicked");
+      };
+
+      // const throttleFunc = throttle(onClick, 4);
+      const throttleFunc = throttle(onClick, 2000, {
+        leading: false,
+        trailing: true,
+      });
+      document.getElementById("btn").addEventListener("click", throttleFunc);
+    </script>
+  </body>
+</html>
