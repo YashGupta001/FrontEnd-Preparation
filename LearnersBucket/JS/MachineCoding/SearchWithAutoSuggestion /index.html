@@ -1,0 +1,156 @@
+<!--
+
+    https://www.youtube.com/watch?v=_XOToOfrwtc&list=PL_KW_uw2ITn8xWRkGZjKTfb-9xj_pJfgT&index=12
+
+Create a augo suggestion box in vanilla js
+Create a suggestion area bottom to the input box that shows the suggestion list
+The list is visible when the input box is in focus or when user types, it hides when the input box is blurred
+getSuggestion(text): method will act as mock server and will return random text based on the inputs with 0 - 200 miliseconds latency and may fail
+If a suggestion is clicked, populate the input box with its value and bring input box in focus
+
+
+
+
+innerHtml, innerText
+relative, absolute
+height
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      main {
+        width: 500px;
+        margin: 10px auto 0 auto;
+      }
+      #search {
+        padding: 10px;
+        width: 100%;
+      }
+      #suggestion-area {
+        border: 1px solid red;
+        margin-top: 10px;
+        min-height: 100px;
+        padding: 5px;
+        position: relative;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="">
+      <input type="search" id="search" placeholder="Enter your query" />
+      <div id="suggestion-area"></div>
+    </main>
+
+    <script>
+      // Mock Server
+      const FAILURE_COUNT = 10;
+      const LATENCY = 200;
+
+      function getRandomBool(n) {
+        const threshold = 1000;
+        if (n > threshold) n = threshold;
+        return Math.floor(Math.random() * threshold) % n === 0;
+      }
+
+      function getSuggestions(text) {
+        var pre = "pre";
+        var post = "post";
+        var results = [];
+        if (getRandomBool(2)) {
+          results.push(pre + text);
+        }
+        if (getRandomBool(2)) {
+          results.push(text);
+        }
+        if (getRandomBool(2)) {
+          results.push(text + post);
+        }
+        if (getRandomBool(2)) {
+          results.push(pre + text + post);
+        }
+        return new Promise((resolve, reject) => {
+          const randomTimeout = Math.random() * LATENCY;
+          setTimeout(() => {
+            if (getRandomBool(FAILURE_COUNT)) {
+              reject();
+            } else {
+              resolve(results);
+            }
+          }, randomTimeout);
+        });
+      }
+
+      (function () {
+        const input = document.getElementById("search");
+        const suggestionArea = document.getElementById("suggestion-area");
+
+        const onFocus = () => {
+          suggestionArea.style.display = "block";
+        };
+
+        // const onBlur = () => {
+        //   suggestionArea.style.display = "none";
+        // };
+
+        const onBlur = (e) => {
+          if (e.target === input || e.target === suggestionArea) {
+            return;
+          }
+          suggestionArea.style.display = "none";
+        };
+
+        const onChange = (e) => {
+          processData(e.target.value);
+        };
+
+        const processData = async (value) => {
+          suggestionArea.innerHTML = ""; // so that whenever this function is invoked the previous resuot will be cleared out
+          if (!value) {
+            // suggestionArea.innerHTML = ""; // to remove the popluated result in case of empty when press on back
+            return;
+          }
+          try {
+            const res = await getSuggestions(value);
+            if (res.length > 0) {
+              const list = document.createElement("ul");
+              res.forEach((suggestion) => {
+                const listItems = document.createElement("li");
+                listItems.innerText = suggestion;
+                listItems.style.cursor = "pointer";
+                list.appendChild(listItems);
+              });
+
+              suggestionArea.innerHTML = ""; // remove and see the issue
+              suggestionArea.appendChild(list);
+            }
+          } catch (e) {
+            console.error("Error while making network call", e);
+          }
+        };
+
+        const onClick = (e) => {
+          if (e.target === suggestionArea) {
+            return;
+          }
+          const text = e.target.innerText;
+          input.value = text;
+          input.focus();
+          console.log(e.target.innerText);
+        };
+
+        input.addEventListener("focus", onFocus);
+        // input.addEventListener("blur", onBlur);
+        window.addEventListener("click", onBlur);
+        input.addEventListener("keyup", onChange);
+        // suggestionArea.addEventListener("click", onClick);
+        suggestionArea.addEventListener("click", onClick, true); // it will enable the capturing
+      })();
+    </script>
+  </body>
+</html>
