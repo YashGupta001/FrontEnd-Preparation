@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="parent">
+      <input type="text" name="foo.bat" value="1" />
+      <input type="text" name="foo.bar.baz" value="2" />
+      <input type="text" name="fizz" value="3" />
+    </form>
+
+    <script>
+      const getValue = (id) => {
+        const parent = document.getElementById(id);
+        const inputs = parent.querySelectorAll("input"); // it will return the node list to traverse you need to use forEach or convert it into array
+        const output = {};
+
+        inputs.forEach((e) => {
+          console.log("e", e);
+          const { name, value } = e;
+          const pathsArr = name.split(".");
+
+          let temp = output; // store the output in temp variable because we are going to traverse the object and we are going to change its reference
+          pathsArr.forEach((path, index) => {
+            if (!(path in temp)) {
+              temp[path] = {};
+            }
+
+            // to check if we are the last index of array means we dont need to creare {}, this is explicit check also it can override the above in case its first level only
+
+            if (index === pathsArr.length - 1) {
+              temp[path] = value;
+            }
+
+            temp = temp[path];
+          });
+        });
+        return output;
+      };
+
+      console.log(getValue("parent"));
+    </script>
+  </body>
+</html>
