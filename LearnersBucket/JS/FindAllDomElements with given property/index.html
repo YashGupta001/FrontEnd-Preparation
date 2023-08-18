@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root" style="color: #fff">
+      <span style="color: red">Red</span>
+      <span style="color: orange">Orange</span>
+      <span style="color: #f00">Red</span>
+      <span style="color: #ff0000">Red</span>
+      <span style="color: rgb(255, 0, 0)">Red</span>
+      <span>Black</span>
+    </div>
+    <script>
+      const getComputedColor = (colorCode) => {
+        const div = document.createElement("div");
+        div.style.color = colorCode;
+        document.body.appendChild(div);
+        const computedStyles = window.getComputedStyle(div);
+        const { color } = computedStyles;
+        document.body.removeChild(div);
+        return color;
+      };
+      //   console.log(getComputedColor("red"));
+      //   console.log(getComputedColor("#f00"));
+      //   console.log(getComputedColor("#ff0000"));
+      //   console.log(getComputedColor("rgb(255, 0, 0)"));
+
+      const findEle = (root, colorCode) => {
+        const standardColor = getComputedColor(colorCode);
+        const output = [];
+
+        const search = (element) => {
+          const elementColor = element.style.color;
+          const elementComputedColor = getComputedColor(elementColor);
+
+          if (elementComputedColor === standardColor) {
+            output.push(element);
+          }
+
+          console.log("element", element);
+
+          for (let child of element.children) {
+            search(child);
+          }
+        };
+
+        search(root);
+
+        return output;
+      };
+
+      const root = document.getElementById("root");
+      console.log(findEle(root, "red"));
+    </script>
+  </body>
+</html>
