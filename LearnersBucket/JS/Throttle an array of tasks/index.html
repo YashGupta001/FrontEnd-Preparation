@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttle with array of tasks</title>
+  </head>
+  <body>
+    <button id="button">Click</button>
+    <script>
+      const button = document.getElementById("button");
+
+      const throttle = (array, limit, callback, delay) => {
+        let timerId;
+        let lastRan;
+        let queue = [...array];
+
+        return function () {
+          if (!lastRan) {
+            const ele = queue.splice(0, limit);
+            callback(ele);
+            lastRan = Date.now();
+          } else {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => {
+              if (Date.now() - lastRan > delay) {
+                const ele = queue.splice(0, limit);
+                callback(ele);
+                lastRan = Date.now();
+              }
+            }, delay - (Date.now() - lastRan));
+          }
+        };
+      };
+
+      button.addEventListener(
+        "click",
+        throttle(
+          [1, 2, 3, 4, 5, 6, 7, 8],
+          2,
+          (task) => {
+            console.log(task);
+          },
+          2000
+        )
+      );
+    </script>
+  </body>
+</html>
