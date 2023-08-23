@@ -35,6 +35,8 @@ FOlder Structure: https://www.youtube.com/watch?v=Mm6_DlO5vvs
 
 # UI:
 
+https://www.glassdoor.co.in/Interview/Atlassian-Frontend-Engineer-Interview-Questions-EI_IE115699.0,9_KO10,27.htm
+
 TopMate Book PDF
 Vedant Jain: https://www.youtube.com/playlist?list=PLe3J6mZBq1xVDr297Yg0p1SHbdj_Oceld React
 JS: https://github.com/leonardomso/33-js-concepts git repo 
