@@ -17,19 +17,11 @@ Sliding Window Patterns: https://leetcode.com/problems/frequency-of-the-most-fre
 
 Graph Patterns: https://leetcode.com/discuss/study-guide/655708/Graph-For-Beginners-Problems-or-Pattern-or-Sample-Solutions 
 
-https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
-https://docs.google.com/spreadsheets/d/1A2PaQKcdwO_lwxz9bAnxXnIQayCouZP6d-ENrBz_NXc/edit#gid=0 
-
-
-https://www.youtube.com/watch?v=N89PN_uyelU&list=PLUcsbZa0qzu3yNzzAxgvSgRobdUUJvz7p&index=1 
 
 
 
-https://takeuforward.org/data-structure/rat-in-a-maze/ --> takeuforward very important list
+https://www.youtube.com/watch?v=N89PN_uyelU&list=PLUcsbZa0qzu3yNzzAxgvSgRobdUUJvz7p&index=1 --> Anuj bhaiya
 
-https://www.youtube.com/playlist?list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz --> start next
-
-https://www.youtube.com/watch?v=EHCGAZBbB88&list=PL_z_8CaSLPWeM8BDJmIYDaoQ5zuwyxnfj --> aditya
 
 FOlder Structure: https://www.youtube.com/watch?v=Mm6_DlO5vvs
 
@@ -57,3 +49,7 @@ https://www.youtube.com/@js_cafe/playlists
 
 # AWS
  https://www.youtube.com/watch?v=jRGW4uInhkE&list=PL6XT0grm_TfgtwtwUit305qS-HhDvb4du&index=6  
+
+
+
+https://onestopfrontend.graphy.com/s/courses/6465e1cae4b0ad0c60a01e86/take

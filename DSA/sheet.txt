@@ -153,7 +153,5 @@ Sorting
 (\*) https://leetcode.com/problems/sort-list/
 
 
-strivers-a2z-dsa: (very imp)
-https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/
 
-https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
+
