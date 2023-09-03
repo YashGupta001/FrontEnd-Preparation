@@ -4,6 +4,8 @@ https://leetcode.com/problems/majority-element-ii/
 
 https://www.youtube.com/watch?v=yDbkQd9t2ig
 
+https://www.youtube.com/watch?v=vwZj1K0e9U8
+
 Boyer-Moore Voting Algorithm
 
 At max we can have 2 elements
@@ -22,6 +24,70 @@ If it more than n/3 times, we will push a candidate into result array and return
  * @param {number[]} nums
  * @return {number[]}
  */
+
+// Brute force: check every element and see how many times it comes is it more than n/3 floor ? and add it tc: O(n2), sc: O(1)
+
+var majorityElement = function (nums) {
+  let ans = [];
+  let moreThan = nums.length / 3;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (ans[0] !== nums[i]) {
+      let count = 0;
+      for (let j = 0; j < nums.length; j++) {
+        if (nums[j] === nums[i]) {
+          count++;
+        }
+      }
+      if (count > moreThan) {
+        ans.push(nums[i]);
+      }
+    }
+
+    if (ans.length === 2) break;
+  }
+
+  return ans;
+};
+
+// better: TC: O(n), SC: O(n)
+
+var majorityElement = function (nums) {
+  const seen = {};
+  const ans = [];
+
+  for (let num of nums) {
+    seen[num] = (seen[num] || 0) + 1;
+  }
+
+  for (let key in seen) {
+    if (seen[key] > nums.length / 3) {
+      ans.push(key);
+    }
+  }
+
+  return ans;
+};
+
+// OR DO IT IN ONE LOOP
+
+var majorityElement = function (nums) {
+  const seen = {};
+  const ans = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    seen[num] = (seen[num] || 0) + 1;
+    if (seen[num] === Math.floor(nums.length / 3) + 1) {
+      ans.push(num);
+    }
+  }
+
+  return ans;
+};
+
+// Optimal, TC: O(2n), SC: O(1)
+
 var majorityElement = function (nums) {
   // base case
   if (nums.length === 1) return [nums[0]];
@@ -67,49 +133,4 @@ var majorityElement = function (nums) {
   if (appear2 > nums.length / 3) res.push(candidate2);
 
   return res;
-};
-
-// my solution
-
-var majorityElement = function (nums) {
-  let count1 = 0;
-  let count2 = 0;
-  let freq1 = 0;
-  let freq2 = 0;
-  let result = [];
-  let num1, num2;
-
-  for (let num of nums) {
-    if (num1 === num) count1++;
-    else if (num2 === num) count2++;
-    else if (count1 === 0) {
-      num1 = num;
-      count1++;
-    } else if (count2 === 0) {
-      num2 = num;
-      count2++;
-    } else {
-      count1--;
-      count2--;
-    }
-  }
-
-  for (let num of nums) {
-    if (num1 === num) {
-      freq1++;
-    }
-    if (num2 === num) {
-      freq2++;
-    }
-  }
-
-  if (freq1 > Math.floor(nums.length / 3)) {
-    result.push(num1);
-  }
-
-  if (freq2 > Math.floor(nums.length / 3)) {
-    result.push(num2);
-  }
-
-  return result;
 };

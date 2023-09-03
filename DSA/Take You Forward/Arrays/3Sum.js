@@ -1,20 +1,97 @@
 /*
 
-https://www.youtube.com/watch?v=cIyvLL_HPY0 
-
-https://www.youtube.com/watch?v=E7Ie6OlQgN4 --> watch
+take you forward : https://www.youtube.com/watch?v=DhFh8Kw7ymk
 
 https://leetcode.com/problems/3sum/
+
+*/
+
+// brute force: TC: O(n3)
+var threeSum = function (nums) {
+  const output = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (nums[i] + nums[j] + nums[k] === 0) {
+          output.push([nums[i], nums[j], nums[k]]);
+        }
+      }
+    }
+  }
+
+  for (let arr of output) {
+    arr.sort();
+  }
+
+  return [...new Set(output.map(JSON.stringify))].map(JSON.parse); // a lot to learn for how to remove duplicates from 2d array
+};
+
+// better TC: O(n2), sc: O(n + n)
+
+var threeSum = function (nums) {
+  const output = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let seen = {};
+    for (let j = i + 1; j < nums.length; j++) {
+      let k = -(nums[i] + nums[j]);
+      if (seen[k]) {
+        let values = [nums[i], nums[j], k];
+        output.push(values.sort());
+      }
+      seen[nums[j]] = true;
+    }
+  }
+
+  return [...new Set(output.map(JSON.stringify))].map(JSON.parse);
+};
+
+// optimal: TC: O(n2), SC: O(1)
+
+var threeSum = function (nums) {
+  if (nums.length < 3) return nums;
+  const triplets = [];
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    let j = i + 1;
+    let k = nums.length - 1;
+
+    while (j < k) {
+      const sum = nums[i] + nums[j] + nums[k];
+      if (sum < 0) {
+        j++;
+      } else if (sum > 0) {
+        k--;
+      } else {
+        triplets.push([nums[i], nums[j], nums[k]]);
+        j++;
+        k--;
+        while (j < k && nums[j] === nums[j - 1]) j++;
+        while (j < k && nums[k] === nums[k + 1]) k--;
+      }
+    }
+  }
+
+  return triplets;
+};
+
+/*
+
+https://www.youtube.com/watch?v=cIyvLL_HPY0 
+https://www.youtube.com/watch?v=E7Ie6OlQgN4 --> watch
+
 
 
 Two Pointer Algo
 
-
 Array: when the array is sorted, we need to think about the binary search or the two pointer
-
 
 a + b + c = 0
 fix a then b + c = 0 - a (now it converts into 2 sum problem)
+or a = - (b + c)
 
 */
 
