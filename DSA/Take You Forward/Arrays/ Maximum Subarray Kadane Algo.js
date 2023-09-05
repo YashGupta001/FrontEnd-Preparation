@@ -10,12 +10,12 @@ https://www.youtube.com/watch?v=AHZpyENo7k4
 
 var maxSubArray = function (nums) {
   if (nums.length === 0) return 0;
-  let max = nums[0];
+  let max = -Infinity;
   let sum = 0;
 
   for (let i = 0; i < nums.length; i++) {
     sum += nums[i];
-    max = Math.max(max, sum);
+    max = Math.max(sum, max);
 
     if (sum < 0) {
       sum = 0;
@@ -29,8 +29,9 @@ var maxSubArray = function (nums) {
 
 var maxSubArray = function (nums) {
   if (nums.length === 0) return 0;
-  let max = nums[0];
+  let max = -Infinity;
   let sum = 0;
+
   let start;
   let ansStart = -1;
   let ansEnd = -1;
