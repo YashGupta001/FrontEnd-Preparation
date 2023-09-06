@@ -1,4 +1,12 @@
 
+# Accessibiltiy
+
+https://developer.mozilla.org/en-US/docs/Learn/Accessibility/What_is_accessibility
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles
+
 
 # Data Structure:
 
