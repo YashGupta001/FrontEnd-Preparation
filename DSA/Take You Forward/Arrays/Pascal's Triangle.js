@@ -40,6 +40,21 @@ Shortcut: 7C2 --> 7 * 6 * 5 * 4 * 3 * 2 * 1 / 2 * 1 * (5 * 4 * 3 * 2 * 1) --> wi
 
 */
 
+//
+
+var generate = function (numRows) {
+  var pascal = [];
+  for (var i = 0; i < numRows; i++) {
+    pascal[i] = [];
+    pascal[i][0] = 1;
+    for (var j = 1; j < i; j++) {
+      pascal[i][j] = pascal[i - 1][j - 1] + pascal[i - 1][j];
+    }
+    pascal[i][i] = 1;
+  }
+  return pascal;
+};
+
 // TC: O(r), SC: O(1)
 const r = 5,
   c = 3; // as we start row by 1 and col by 2 not like array
