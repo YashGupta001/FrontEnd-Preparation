@@ -1,54 +1,44 @@
 /*
 
- Longest Palindromic Substring
-
-https://www.youtube.com/watch?v=XYQecbcd6_c
-
-
-
  https://leetcode.com/problems/longest-palindromic-substring/description/
+
+
+ https://www.youtube.com/watch?v=lo8n0ivbhog
 
 
 */
 
-// There is one more way to check the palindrome lets say like going outwards     a <--  b -->   a but it will fail in abba edge case
-// https://www.youtube.com/watch?v=XYQecbcd6_c
+var longestPalindrome = function (s) {
+  if (!s || s.length < 1) return "";
+  let longest = "";
 
-function longestPalindrome(characters) {
-  let result = characters[0];
+  for (let i = 0; i < s.length; i++) {
+    let oddPalindrome = expandFromCenter(s, i, i);
+    let evenPalindrome = expandFromCenter(s, i - 1, i);
 
-  for (let i = 0; i < characters.length; i++) {
-    const character = characters[i];
-
-    // while characters to left and right of current character are the same
-    let leftIndex = i;
-    let rightIndex = i;
-    while (
-      characters[leftIndex] === characters[rightIndex] &&
-      leftIndex >= 0 &&
-      rightIndex <= characters.length - 1
-    ) {
-      const stringPart = characters.slice(leftIndex, rightIndex + 1);
-      result = stringPart.length > result.length ? stringPart : result;
-
-      leftIndex--;
-      rightIndex++;
+    if (oddPalindrome.length > longest.length) {
+      longest = oddPalindrome;
     }
 
-    leftIndex = i;
-    rightIndex = i + 1;
-    while (
-      characters[leftIndex] === characters[rightIndex] &&
-      leftIndex >= 0 &&
-      rightIndex <= characters.length - 1
-    ) {
-      const stringPart = characters.slice(leftIndex, rightIndex + 1);
-      result = stringPart.length > result.length ? stringPart : result;
-
-      leftIndex--;
-      rightIndex++;
+    if (evenPalindrome.length > longest.length) {
+      longest = evenPalindrome;
     }
   }
 
-  return result;
-}
+  return longest;
+};
+
+var expandFromCenter = function (s, left, right) {
+  let pal = "";
+
+  while (left >= 0 && right < s.length) {
+    if (s[left] === s[right]) {
+      left--;
+      right++;
+    } else {
+      break;
+    }
+  }
+
+  return s.slice(left + 1, right);
+};
