@@ -2,6 +2,8 @@
 
 https://leetcode.com/problems/same-tree/description/
 
+https://www.youtube.com/watch?v=BhuvF_-PWS0
+
 */
 
 var isSameTree = function (p, q) {
