@@ -1,19 +1,20 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/MicroFrontEnd/App1/node_modules
-/MicroFrontEnd/App2/node_modules
-/MicroFrontEnd/App3/node_modules
+/MicroFrontEnd/Dashboard/node_modules
+/MicroFrontEnd/Marketing/node_modules
+/MicroFrontEnd/Auth/node_modules
 /MicroFrontEnd/Container/node_modules
 
-/MicroFrontEnd/App1/package-lock.json
-/MicroFrontEnd/App2/package-lock.json
-/MicroFrontEnd/App3/package-lock.json
+/MicroFrontEnd/Dashboard/package-lock.json
+/MicroFrontEnd/Marketing/package-lock.json
+/MicroFrontEnd/Auth/package-lock.json
 /MicroFrontEnd/Container/package-lock.json
 
 
 /FrontEnd.pdf
 /Javascript-Interview-Guide.pdf
+
 
 
 
