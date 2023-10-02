@@ -3,6 +3,8 @@
 # dependencies
 /microfront-end
 /node_modules
+/FrontEnd.pdf
+/Javascript-Interview-Guide.pdf
 package-lock.json
 
 
