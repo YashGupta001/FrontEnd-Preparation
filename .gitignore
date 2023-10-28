@@ -12,6 +12,19 @@
 /MicroFrontEnd/Container/package-lock.json
 
 
+/MERN Stack Chat App/node_modules
+/MERN Stack Chat App/package.json
+/MERN Stack Chat App/package-lock.json
+/MERN Stack Chat App/frontend/node_modules
+/MERN Stack Chat App/frontend/package.json
+/MERN Stack Chat App/frontend/package-lock.json
+/MERN Stack Chat App/frontend/public/robots.txt
+/MERN Stack Chat App/frontend/.gitignore
+/MERN Stack Chat App/frontend/README.md
+
+/MERN Stack Chat App/.env
+
+
 /FrontEnd.pdf
 /Javascript-Interview-Guide.pdf
 
