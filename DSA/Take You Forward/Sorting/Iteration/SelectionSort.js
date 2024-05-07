@@ -4,6 +4,8 @@ https://www.youtube.com/watch?v=HGk_ypEuS24
 
 Take the minimum and do the sorting
 
+Select min and swap
+
 [3,5,1,6]
 
 
