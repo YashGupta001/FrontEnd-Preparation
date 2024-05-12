@@ -13,6 +13,23 @@ output: [1,2,3,4,5,6, 7]
 
 */
 
+/*
+
+https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/
+
+
+Input: arr1[] = {1, 3, 4, 5, 7}
+        arr2[] = {2, 3, 5, 6} 
+Output: Union : {1, 2, 3, 4, 5, 6, 7} 
+         Intersection : {3, 5}
+
+Input: arr1[] = {2, 5, 6}
+        arr2[] = {4, 6, 8, 10} 
+Output: Union : {2, 4, 5, 6, 8, 10} 
+         Intersection : {6}
+
+*/
+
 // brute force
 function unionSortedArr(arr1, arr2) {
   const new1 = [...new Set(arr1)];
@@ -22,7 +39,7 @@ function unionSortedArr(arr1, arr2) {
   return [...new Set(mergedArr)];
 }
 
-unionSortedArr([1, 1, 2, 2, 3, 4, 5, 6], [2, 3, 6, 7]);
+unionSortedArr([1, 1, 3, 4, 5, 6], [2, 3, 6, 7]);
 
 // optimal   TC: O(n +m), SC: O(n + m) to return the answer not for the algorithm
 
@@ -63,3 +80,12 @@ function unionSortedArr(arr1, arr2) {
 }
 
 unionSortedArr([1, 1, 2, 2, 3, 4, 5, 6], [2, 3, 6, 7]);
+
+/*
+
+
+const arr1 = [1,1,2,2,3,4,5,6]
+consr arr2 = [2,3,6,7]
+output: [1,2,3,4,5,6,7]
+
+*/
